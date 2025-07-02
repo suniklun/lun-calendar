@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡易日曆</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="site-title">一輪版日曆</div>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button id="prevMonth">&lt;</button>
+            <span id="monthYear"></span>
+            <button id="nextMonth">&gt;</button>
+            <button id="todayBtn" style="margin-left:8px;">今日</button>
+        </div>
+        <div class="view-switcher" style="text-align:right;margin-bottom:8px;">
+            <!-- 預留視圖切換按鈕，僅顯示月視圖 -->
+            <button class="view-btn active" id="monthViewBtn">月</button>
+            <!-- <button class="view-btn" id="weekViewBtn">週</button> -->
+            <!-- <button class="view-btn" id="dayViewBtn">日</button> -->
+        </div>
+        <table class="calendar">
+            <thead>
+                <tr>
+                    <th>日</th>
+                    <th>一</th>
+                    <th>二</th>
+                    <th>三</th>
+                    <th>四</th>
+                    <th>五</th>
+                    <th>六</th>
+                </tr>
+            </thead>
+            <tbody id="calendarBody">
+                <!-- 日曆內容由 JS 動態產生 -->
+            </tbody>
+        </table>
+    </div>
+    <div class="modal" id="inputModal">
+        <div class="modal-content">
+            <div style="margin-bottom:8px;font-weight:600;">行程管理</div>
+            <form id="eventForm" autocomplete="off">
+                <label style="font-size:14px;">標題</label>
+                <input type="text" id="eventTitle" placeholder="行程標題" required>
+                <label style="font-size:14px;">描述</label>
+                <input type="text" id="eventDesc" placeholder="行程描述">
+                <div style="display:flex;align-items:center;margin:8px 0 12px 0;gap:8px;">
+                    <input type="checkbox" id="allDay" style="margin-right:6px;">
+                    <label for="allDay" style="font-size:14px;">全天</label>
+                    <input type="time" id="startTime" style="margin-left:16px;flex:1;" placeholder="開始">
+                    <span style="margin:0 4px;">~</span>
+                    <input type="time" id="endTime" style="flex:1;" placeholder="結束">
+                </div>
+                <div id="eventList" style="margin-bottom:8px;"></div>
+                <button type="submit" id="saveEvent">新增/儲存</button>
+                <button type="button" id="deleteEvent" style="background:#b71c1c;color:#fff;margin-top:6px;display:none;">刪除</button>
+                <button type="button" id="closeModal" style="background:#bdbdbd;color:#222;margin-top:6px;">取消</button>
+            </form>
+        </div>
+    </div>
+    <div class="site-footer">
+        <div>版權沒有 番茄必究</div>
+        <div>孫翊倫 製</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

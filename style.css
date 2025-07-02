@@ -1,0 +1,331 @@
+body {
+    font-family: 'Times New Roman', '標楷體', 'Noto Serif TC', serif;
+    background: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+/* 中英文分開字型 */
+body, .site-title, .site-footer, .calendar-container, .calendar-header, .calendar, .modal-content, button, input, label, th, td, .event-item {
+    font-family: 'Times New Roman', '標楷體', 'Noto Serif TC', serif;
+}
+
+/* 強制中文用楷體 */
+:lang(zh), .zh, [lang="zh"], [lang|=zh] {
+    font-family: '標楷體', 'Noto Serif TC', serif !important;
+}
+
+/* 強制英文用 Times New Roman */
+:lang(en), .en, [lang="en"], [lang|=en] {
+    font-family: 'Times New Roman', Times, serif !important;
+}
+
+.calendar-container {
+    background: #fff;
+    max-width: 420px;
+    margin: 40px auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    border-radius: 16px;
+    padding: 24px 16px 16px 16px;
+    border: 1px solid #e0e0e0;
+}
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.calendar-header button {
+    background: #e0e0e0;
+    color: #222;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    outline: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.calendar-header button:hover {
+    background: #bdbdbd;
+}
+.calendar-header span {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.calendar {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 4px;
+}
+.calendar th, .calendar td {
+    width: 13.5%;
+    height: 44px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background 0.2s, color 0.2s;
+}
+.calendar th {
+    background: #f0f0f0;
+    font-weight: 500;
+    color: #757575;
+}
+.calendar td {
+    background: #fafafa;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    position: relative;
+}
+.calendar td:hover {
+    background: #e0e0e0;
+    border: 1.5px solid #bdbdbd;
+}
+.calendar td.today {
+    background: #bdbdbd;
+    color: #fff;
+    font-weight: bold;
+    border: 1.5px solid #757575;
+}
+.calendar-header button#todayBtn {
+    background: #757575;
+    color: #fff;
+    border-radius: 18px;
+    width: auto;
+    height: 36px;
+    padding: 0 18px;
+    font-size: 15px;
+    margin-left: 8px;
+    font-weight: 500;
+}
+.calendar-header button#todayBtn:hover {
+    background: #222;
+}
+.view-switcher {
+    margin-bottom: 8px;
+}
+.view-btn {
+    background: #e0e0e0;
+    color: #222;
+    border: none;
+    border-radius: 8px;
+    padding: 4px 16px;
+    font-size: 15px;
+    margin-left: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.view-btn.active, .view-btn:hover {
+    background: #757575;
+    color: #fff;
+}
+@media (max-width: 600px) {
+    .calendar-container {
+        max-width: 98vw;
+        padding: 8px 2vw 8px 2vw;
+    }
+    .calendar th, .calendar td {
+        font-size: 13px;
+        height: 32px;
+    }
+    .calendar-header span {
+        font-size: 16px;
+    }
+}
+/* 彈出輸入框樣式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.18);
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s;
+}
+.modal.active {
+    display: flex;
+}
+.modal-content {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px 20px 16px 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    min-width: 240px;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: transform 0.35s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.35s;
+    pointer-events: none;
+}
+.modal.active .modal-content {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+.modal-content input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid #bdbdbd;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+.modal-content button {
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 0;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background 0.2s;
+}
+.modal-content button:hover {
+    background: #757575;
+}
+.modal-content label {
+    margin-top: 4px;
+    margin-bottom: 2px;
+    font-weight: 500;
+    color: #444;
+}
+#eventForm input[type="text"], #eventForm input[type="time"] {
+    padding: 7px 10px;
+    border: 1px solid #bdbdbd;
+    border-radius: 6px;
+    font-size: 15px;
+    margin-bottom: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+#eventForm input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+#eventList {
+    margin: 8px 0 8px 0;
+}
+.event-item {
+    background: #f0f0f0;
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #e0e0e0;
+    animation: eventIn 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.event-item.selected {
+    background: #757575;
+    color: #fff;
+}
+.event-item .event-title {
+    font-weight: 600;
+    margin-right: 8px;
+}
+.event-item .event-time {
+    color: #1976d2;
+    font-size: 13px;
+    margin-right: 8px;
+}
+.event-item .event-desc {
+    color: #666;
+    font-size: 13px;
+}
+#deleteEvent {
+    background: #b71c1c;
+    color: #fff;
+    border-radius: 6px;
+    padding: 8px 0;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background 0.2s;
+    display: none;
+}
+#deleteEvent.show {
+    display: block;
+}
+#eventForm input[type="time"] {
+    width: 100%;
+    min-width: 0;
+}
+#eventForm input[type="time"]:disabled {
+    background: #eee;
+    color: #aaa;
+}
+#eventForm .time-range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+/* 日曆表格切換動畫 */
+.calendar-animate {
+    animation: calendarFadeIn 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+}
+@keyframes calendarFadeIn {
+    from { opacity: 0; transform: translateY(40px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+/* 事件列表動畫 */
+.event-item.removing {
+    animation: eventOut 0.4s cubic-bezier(.68,-0.55,.27,1.55) forwards;
+}
+@keyframes eventOut {
+    from { opacity: 1; transform: translateX(0) scale(1); }
+    to { opacity: 0; transform: translateX(-40px) scale(0.7); }
+}
+/* 按鈕點擊動畫 */
+button:active {
+    transform: scale(0.92);
+    box-shadow: 0 2px 12px #75757555;
+}
+button {
+    transition: transform 0.15s, box-shadow 0.2s;
+}
+.site-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+}
+.site-footer {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #888;
+    margin-top: 40px;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+    line-height: 1.7;
+}
+.event-del-btn {
+    background: none;
+    border: none;
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-left: 10px;
+    cursor: pointer;
+    padding: 0 6px;
+    transition: color 0.2s, transform 0.15s;
+    outline: none;
+}
+.event-del-btn:hover {
+    color: #fff;
+    background: #d32f2f;
+    border-radius: 4px;
+    transform: scale(1.15);
+} 
